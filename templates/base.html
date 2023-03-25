@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>GPT Translator</title>
+</head>
+<body>
+<header>
+
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>&copy; 2023 My Website. All rights reserved.</p>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

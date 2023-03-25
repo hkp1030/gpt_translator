@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <form id="translateForm">
+        {% csrf_token %}
+        <select name="orig_lang">
+            <option value="Korean">Korean</option>
+            <option value="English">English</option>
+        </select>
+        ->
+        <select name="target_lang">
+            <option value="Korean">Korean</option>
+            <option value="English">English</option>
+        </select>
+        <textarea name="text" rows="5" maxlength="1000"></textarea>
+        <button id="translateBtn" type="button">번역</button>
+        <pre id="result"></pre>
+    </form>
+    <script src="{% static 'js/translate.js' %}"></script>
+{% endblock %}
