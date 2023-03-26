@@ -19,7 +19,7 @@ def translate(request):
         orig_lang = form.cleaned_data['orig_lang']
         target_lang = form.cleaned_data['target_lang']
 
-        command = f'Translate from {orig_lang} to {target_lang}. Don\'t say anything other than the translation.'
+        command = f'Translate from {orig_lang} to {target_lang}. Never do anything other than translate.'
         response = openai.ChatCompletion.create(
             model='gpt-3.5-turbo',
             messages=[
