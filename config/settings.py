@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import os
 import openai
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'translator.apps.TranslatorConfig',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 openai.organization = 'org-fGvKVC9JUGRsO0PC4gGD2YdZ'
 openai.api_key = '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'
+
+# SASS
+SASS_PROCESSOR_ENABLED = True
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
+SASS_OUTPUT_STYLE = 'compact'

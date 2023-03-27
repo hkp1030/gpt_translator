@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&family=STIX+Two+Text:wght@400;500;60;7000&display=swap');
+
+:root {
+  /* font size */
+  --font-large: 28px ;
+  --font-medium: 22px ;
+  --font-semi: 18px ;
+  --font-regular: 16px ;
+
+  /* font weight */
+  --font-bold: 700;
+}
+
+
+html {
+  line-height: 1.3;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  margin-right: auto;
+  margin-left: auto;
+  overflow-x: hidden;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+a,
+abbr,
+acronym,
+address,
+del,
+em,
+img,
+small,
+strike,
+strong,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+menu,
+nav,
+section,
+summary,
+time {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+div,
+span,
+article,
+section,
+header,
+footer,
+aside,
+p,
+ul,
+li,
+fieldset,
+legend,
+label,
+a,
+nav,
+form {
+  box-sizing: border-box;
+}
+
+ol,
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+header,
+main,
+footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1080px;
+}
+
+/* header */
+.gt_title {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 30px 0;
+  font-size: var(--font-large);
+  font-weight: 700;
+}
+
+
+/* Translate Section */
+#translateForm {
+  display: flex;
+  flex-direction: row;
+  z-index: 10;
+  position: relative;
+  padding: 15px 25px;
+  min-height: 240px;
+  height: auto;
+  border: 1px solid rgb(233, 233, 233)
+}
+
+.translateSection {
+  /* border: 1px solid black */
+}
+
+.translateSelect {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.translateSelect__select{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+/* Select Cusmtom */
+.translateSelect__select__container {
+  position: relative;
+  width: 150px;
+  height: 35px;
+  border-radius: 4px;
+  /* background: 여기에 화살표 */
+  background-size: 20px;
+  cursor: pointer;
+}
+
+.selectBox2:after {
+  content: '';
+  display: block; 
+  width: 2px;
+  height: 100%; 
+  position: absolute; 
+  top: 0; 
+  right: 35px;
+}
+
+.translateSelect__select__lang {
+  font-size: var(--font-semi);
+  display: flex;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  border: none;
+  outline: none;
+  padding-left: 15px;
+  background: transparent;
+  cursor: pointer;
+  margin-bottom: 5px;
+  padding: 8px 10px;
+}
+
+.translateSelect__select__lang:focus {
+  outline: none;
+}
+
+.translate__select__lang__ul {
+  position: absolute; 
+  top: 28px;
+  left: 0;
+  width: 100%;
+  list-style-type: none;
+  padding: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  max-height: 0;
+  transition: .3s ease-in;
+}
+
+.translate__select__lang__ul.active {
+  max-height: 500px;
+}
+
+.translateSelect__select__lang--element {
+  border-bottom: 1px dashed rgb(170, 72, 72);
+  padding: 5px 15px 5px;
+  transition: .1s;
+}
+
+.translateSelect__select__lang--element:hover {
+  background: rgb(175, 93, 93);
+}
+
+
+/* translate input field (left section) */
+.translateSelect__textarea{
+  padding: 0 8px;
+}
+
+.translateSelect__textarea__input {
+  width: 100%;
+  font-size: var(--font-regular);
+  border: none;
+  resize: none;
+}
+
+.translateSelect__textarea__input:focus {
+  outline: none;
+}
+
+
+/* translate right section */
+.translateSelect__area {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  min-height: 123px;
+  padding: 13px 19px;
+  background-color: rgb(244, 244, 244);
+  border-radius: 10px;
+  margin: 0 8px;
+}
+
+#result {
+  padding: auto;
+  word-wrap: break-word;
+}
+
+/* button */
+#translateBtn {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 30px;
+  border-radius: 5px;
+  background-color: aliceblue;
+}
+
+.translateSelect__button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  #translateForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .translateSelect {
+    width: 100%
+  }
+}
