@@ -2,20 +2,43 @@
 {% load static %}
 
 {% block content %}
+<section class="translateSection">
     <form id="translateForm">
         {% csrf_token %}
-        <select name="orig_lang">
-            <option value="Korean">Korean</option>
-            <option value="English">English</option>
-        </select>
-        ->
-        <select name="target_lang">
-            <option value="Korean">Korean</option>
-            <option value="English">English</option>
-        </select>
-        <textarea name="text" rows="5" maxlength="1000"></textarea>
-        <button id="translateBtn" type="button">번역</button>
-        <pre id="result"></pre>
+        <div class="translateSelect">
+            <div class="translateSelect__select">
+                <select class="translateSelect__select__lang lang_lt" name="orig_lang">
+                    <option value="Korean">Korean</option>
+                    <option value="English">English</option>
+                </select>
+                <button id="langBtn" type="button">
+                    <i class="gg-arrows-exchange"></i>
+                </button>
+            </div>
+            <div class="translateSelect__textarea">
+                <textarea class="translateSelect__textarea__input" placeholder="번역할 텍스트를 입력해주세요."
+                    name="text" rows="8" maxlength="1000"></textarea>
+                <div class="translateSelect__button">
+                    <button id="translateBtn" type="button">번역</button>
+                </div>
+            </div>
+        </div>
+        <div class="translateSelect">
+            <div>
+                <select class="translateSelect__select__lang lang_rt" name="target_lang">
+                    <option value="English">English</option>
+                    <option value="Korean">Korean</option>
+                </select>
+            </div>
+            <div class="translateSelect__area">
+                <p id="result"></p>
+            </div>
+        </div>
     </form>
-    <script src="{% static 'js/translate.js' %}"></script>
+    <aside>
+        <!-- 광고 -->
+    </aside>
+</section>
+<script src="{% static 'js/translate.js' %}"></script>
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrows-exchange.css' rel='stylesheet'>
 {% endblock %}
