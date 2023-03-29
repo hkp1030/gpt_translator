@@ -1,12 +1,28 @@
 (() => {
-    const form = document.getElementById('translateForm')
-    const translateBtn = document.getElementById('translateBtn')
-    const langBtn = document.getElementById('langBtn')
-    const selectLeft = document.querySelector(".lang_lt");
-    const selectRight = document.querySelector(".lang_rt");
+    const form = document.getElementById('translateForm');
+    const translateBtn = document.getElementById('translateBtn');
+    const langBtn = document.getElementById('langBtn');
 
-    // const result = document.getElementById('result')
-    const textarea = document.querySelector(".translateSelect__textarea__input")
+    const selectLeft = document.querySelector(".select__lt");
+    const selectRight = document.querySelector(".select__rt");
+    const label = document.querySelectorAll('.translateSelect__select__btn');
+    const item = document.querySelector('.translateSelect__select__lang');
+    const options = document.querySelectorAll('.translateSelect__select__lang--option');
+
+    const result = document.getElementById('result');
+    const textarea = document.querySelector(".translateSelect__textarea__input");
+
+    let formTextarea = "light";
+    let formLeftLanguage = selectLeft.textContent;
+    let formRightLanguage = selectRight.textContent;
+
+ 
+    // fetch시 에러 발생 (formData구조로 받게 되어있어서?)
+    const body = {
+        orig_lang: formLeftLanguage,
+        target_lang: formRightLanguage,
+        text: formTextarea
+    }
 
     form.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -19,7 +35,7 @@
 
         fetch('translate/', {
             method: 'POST',
-            body: new FormData(form)
+            body: new formData(form)
         })
             .then(response => {
                 if (!response.body) {
@@ -43,22 +59,56 @@
                 return readStream()
             })
         .catch(error => console.error(error))
-    }
+    };
 
     // change select box
     langBtn.addEventListener("click", () => {
-        let tmpSelect = selectLeft.value
-        selectLeft.value = selectRight.value
-        selectRight.value = tmpSelect
+        let tmpSelect = selectLeft.textContent
+        selectLeft.textContent = selectRight.textContent
+        selectRight.textContent = tmpSelect
 
-        // let tmpTextarea = result
-        // result = textarea
-        // textarea = tmpTextarea
-        // console.log(result.value, textarea.value)
+        // textarea <-> result change
+        let tmpTextarea = result.textContent
+        result.textContent = textarea.value
+        textarea.value = tmpTextarea
         if (textarea.value !== '') resultTranslate()
     });
 
     translateBtn.addEventListener('click', event => {
         resultTranslate()
-    })
+    });
+
+    label.forEach((lb) => {
+        lb.addEventListener('click', () => {
+            let optionList = lb.nextElementSibling;
+            let optionItems = optionList.querySelectorAll('.translateSelect__select__lang--option');
+            clickLabel(lb, optionItems);
+        })
+    });
+
+    const clickLabel = (lb, optionItems) => {
+        if(lb.parentNode.classList.contains('active')) {
+            lb.parentNode.classList.remove('active');
+            optionItems.forEach((opt) => {
+                opt.removeEventListener('click', () => {
+                    handleSelect(lb, opt)
+                })
+            })
+        } else {
+            lb.parentNode.classList.add('active');
+            optionItems.forEach((opt) => {
+                opt.addEventListener('click', () => {
+                    handleSelect(lb, opt)
+                })
+            })
+        }
+    };
+
+    const handleSelect = (label, item) => {
+        label.textContent = item.textContent;
+        label.parentNode.classList.remove('active');
+
+        // 누적되는 현상 해결중
+        // console.log(label.textContent, item.textContent)
+    };
 })()

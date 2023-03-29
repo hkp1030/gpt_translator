@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&family=STIX+Two+Text:wght@400;500;60;7000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
 
 :root {
   /* font size */
@@ -156,9 +156,9 @@ footer {
   border: 1px solid rgb(233, 233, 233)
 }
 
-.translateSection {
+/* .translateSection { */
   /* border: 1px solid black */
-}
+/* } */
 
 .translateSelect {
   width: 50%;
@@ -185,7 +185,7 @@ footer {
   cursor: pointer;
 }
 
-.selectBox2:after {
+.translateSelect__select__container:after {
   content: '';
   display: block; 
   width: 2px;
@@ -195,7 +195,11 @@ footer {
   right: 35px;
 }
 
-.translateSelect__select__lang {
+.translateSelect__select__container.active {
+  z-index: 40;
+}
+
+.translateSelect__select__btn {
   font-size: var(--font-semi);
   display: flex;
   align-items: center;
@@ -206,16 +210,14 @@ footer {
   padding-left: 15px;
   background: transparent;
   cursor: pointer;
-  margin-bottom: 5px;
   padding: 8px 10px;
 }
 
-.translateSelect__select__lang:focus {
+.translateSelect__select__btn:focus {
   outline: none;
 }
 
-.translate__select__lang__ul {
-  position: absolute; 
+.translateSelect__select__lang {
   top: 28px;
   left: 0;
   width: 100%;
@@ -224,27 +226,29 @@ footer {
   border-radius: 6px;
   overflow: hidden;
   max-height: 0;
-  transition: .3s ease-in;
 }
 
-.translate__select__lang__ul.active {
-  max-height: 500px;
+.translateSelect__select__container.active .translateSelect__select__lang {
+  padding-top: 10px;
+  max-height: 200px;
+  height: 160px;
+  background-color: white;
+  z-index: 20;
 }
 
-.translateSelect__select__lang--element {
-  border-bottom: 1px dashed rgb(170, 72, 72);
-  padding: 5px 15px 5px;
-  transition: .1s;
+.translateSelect__select__lang--option {
+  padding: 5px 0 5px 10px;
 }
 
-.translateSelect__select__lang--element:hover {
-  background: rgb(175, 93, 93);
+.translateSelect__select__lang--option:hover {
+  color: springgreen;
+  font-weight: 500;
 }
 
 
 /* translate input field (left section) */
 .translateSelect__textarea{
-  padding: 0 8px;
+  padding: 13px 10px;
 }
 
 .translateSelect__textarea__input {
@@ -252,6 +256,7 @@ footer {
   font-size: var(--font-regular);
   border: none;
   resize: none;
+  overflow: hidden
 }
 
 .translateSelect__textarea__input:focus {
@@ -264,6 +269,7 @@ footer {
   overflow: hidden;
   position: relative;
   width: 100%;
+  height: 100%;
   min-height: 123px;
   padding: 13px 19px;
   background-color: rgb(244, 244, 244);
@@ -288,6 +294,15 @@ footer {
 .translateSelect__button {
   display: flex;
   justify-content: flex-end;
+}
+
+
+.gg-arrows-exchange {
+  color: rgb(72, 72, 72);
+}
+
+.gg-arrows-exchange:hover {
+  color: black;
 }
 
 /* Mobile */
