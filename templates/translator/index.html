@@ -7,31 +7,50 @@
         {% csrf_token %}
         <div class="translateSelect">
             <div class="translateSelect__select">
-                <select class="translateSelect__select__lang lang_lt" name="orig_lang">
-                    <option value="Korean">Korean</option>
-                    <option value="English">English</option>
-                </select>
+                <div class="translateSelect__select__container active">
+                    <button class="translateSelect__select__btn select__lt" name="orig_lang">English</button>
+                    <ul class="translateSelect__select__lang lang_lt">
+                        <li class="translateSelect__select__lang--option">Korean</li>
+                        <li class="translateSelect__select__lang--option">English</li>
+                        <li class="translateSelect__select__lang--option">Japanese</li>
+                        <li class="translateSelect__select__lang--option">Chinese</li>
+                        <li class="translateSelect__select__lang--option">French</li>
+                        <li class="translateSelect__select__lang--option">German</li>
+                        <li class="translateSelect__select__lang--option">Italian</li>
+                        <li class="translateSelect__select__lang--option">Portuguese</li>
+                        <li class="translateSelect__select__lang--option">Russian</li>
+                        <li class="translateSelect__select__lang--option">Polish</li>
+                    </ul>
+                </div>
                 <button id="langBtn" type="button">
                     <i class="gg-arrows-exchange"></i>
                 </button>
             </div>
             <div class="translateSelect__textarea">
-                <textarea class="translateSelect__textarea__input" placeholder="번역할 텍스트를 입력해주세요."
+                <textarea class="translateSelect__textarea__input" onkeyup="textareaResize(this)" 
+                    placeholder="번역할 텍스트를 입력해주세요."
                     name="text" rows="8" maxlength="1000"></textarea>
                 <div class="translateSelect__button">
                     <button id="translateBtn" type="button">번역</button>
                 </div>
             </div>
         </div>
+        <!-- lang_rt" name="target_lang" -->
         <div class="translateSelect">
-            <div>
-                <select class="translateSelect__select__lang lang_rt" name="target_lang">
-                    <option value="English">English</option>
-                    <option value="Korean">Korean</option>
-                </select>
+            <div class="translateSelect__select">
+                <div class="translateSelect__select__container">
+                    <button class="translateSelect__select__btn select__rt" name="target_lang">Korean</button>
+                    <ul class="translateSelect__select__lang lang_rt">
+                        <li class="translateSelect__select__lang--option">Korean</li>
+                        <li class="translateSelect__select__lang--option">English</li>
+                    </ul>
+                </div>
             </div>
             <div class="translateSelect__area">
                 <p id="result"></p>
+            </div>
+            <div style="margin-bottom: 60px;">
+
             </div>
         </div>
     </form>
@@ -41,4 +60,10 @@
 </section>
 <script src="{% static 'js/translate.js' %}"></script>
 <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrows-exchange.css' rel='stylesheet'>
+<script>
+    const textareaResize = (event) => {
+        event.style.height = 'auto';
+        event.style.height = (16 + event.scrollHeight) + 'px';
+    }
+</script>
 {% endblock %}

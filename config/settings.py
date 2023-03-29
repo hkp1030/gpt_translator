@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'translator.apps.TranslatorConfig',
-    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -120,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -133,9 +132,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API Key
 
 openai.organization = 'org-fGvKVC9JUGRsO0PC4gGD2YdZ'
-openai.api_key = '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'
-
-# SASS
-SASS_PROCESSOR_ENABLED = True
-SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'static')
-SASS_OUTPUT_STYLE = 'compact'
+openai.api_key = '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' 
