@@ -1,5 +1,6 @@
 (() => {
     const form = document.getElementById('translateForm');
+    const key = document.getElementsByName('csrfmiddlewaretoken');
     const translateBtn = document.getElementById('translateBtn');
     const langBtn = document.getElementById('langBtn');
 
@@ -15,13 +16,13 @@
     let formTextarea = "light";
     let formLeftLanguage = selectLeft.textContent;
     let formRightLanguage = selectRight.textContent;
-
  
     // fetch시 에러 발생 (formData구조로 받게 되어있어서?)
     const body = {
         orig_lang: formLeftLanguage,
         target_lang: formRightLanguage,
-        text: formTextarea
+        text: formTextarea,
+        csrfmiddlewaretoken: key[0].defaultValue,
     }
 
     form.addEventListener('submit', (event) => {
@@ -35,7 +36,7 @@
 
         fetch('translate/', {
             method: 'POST',
-            body: new formData(form)
+            body: JSON.stringify(body)
         })
             .then(response => {
                 if (!response.body) {
@@ -90,6 +91,7 @@
         if(lb.parentNode.classList.contains('active')) {
             lb.parentNode.classList.remove('active');
             optionItems.forEach((opt) => {
+                // remove를 못해주고 있음
                 opt.removeEventListener('click', () => {
                     handleSelect(lb, opt)
                 })
@@ -109,6 +111,6 @@
         label.parentNode.classList.remove('active');
 
         // 누적되는 현상 해결중
-        // console.log(label.textContent, item.textContent)
+        console.log(label.textContent, item.textContent)
     };
 })()
