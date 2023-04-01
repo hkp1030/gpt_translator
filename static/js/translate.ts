@@ -1,17 +1,20 @@
 (() => {
-    const form = document.getElementById('translateForm');
-    const key = document.getElementsByName('csrfmiddlewaretoken');
-    const translateBtn = document.getElementById('translateBtn');
-    const langBtn = document.getElementById('langBtn');
+    // tsc name.ts 로 js 컴파일 후 작동시킬것
+    // JS로 대충 작성하고 TS넣는게 좋을 것 같다.
+    
+    const form = document.getElementById('translateForm') as HTMLElement;
+    const key = document.getElementsByName('csrfmiddlewaretoken') as NodeListOf<HTMLInputElement>;
+    const translateBtn = document.getElementById('translateBtn') as HTMLElement;
+    const langBtn = document.getElementById('langBtn') as HTMLElement;
 
-    const selectLeft = document.querySelector(".select__lt");
-    const selectRight = document.querySelector(".select__rt");
-    const label = document.querySelectorAll('.translateSelect__select__btn');
-    const item = document.querySelector('.translateSelect__select__lang');
-    const options = document.querySelectorAll('.translateSelect__select__lang--option');
+    const selectLeft = document.querySelector(".select__lt") as HTMLElement;
+    const selectRight = document.querySelector(".select__rt") as HTMLElement;
+    const label = document.querySelectorAll('.translateSelect__select__btn') as NodeListOf<HTMLElement>;
+    const item = document.querySelector('.translateSelect__select__lang') as HTMLElement;
+    const options = document.querySelectorAll('.translateSelect__select__lang--option') as NodeListOf<HTMLElement>;
 
-    const result = document.getElementById('result');
-    const textarea = document.querySelector(".translateSelect__textarea__input");
+    const result = document.getElementById('result') as HTMLElement;
+    const textarea = document.querySelector(".translateSelect__textarea__input") as HTMLInputElement;
 
     let formTextarea = "light";
     let formLeftLanguage = selectLeft.textContent;
@@ -24,13 +27,13 @@
         text: formTextarea,
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', (event: SubmitEvent) => {
         event.preventDefault()
     })
 
     // this function is translate result
     const resultTranslate = () => {
-        const resultText = document.getElementById('result')
+        const resultText = document.getElementById('result') as HTMLElement
         resultText.innerText = ''
 
         fetch('translate/', {
@@ -80,11 +83,10 @@
         resultTranslate()
     });
 
-    // CSS 문제로 다시 짤 것
-
-    label.forEach((lb) => {
+    label.forEach((lb: HTMLElement) => {
         lb.addEventListener('click', () => {
             let optionList = lb.nextElementSibling;
+            console.log(optionList)
             let optionItems = optionList.querySelectorAll('.translateSelect__select__lang--option');
             clickLabel(lb, optionItems);
         })
@@ -92,19 +94,17 @@
 
     const clickLabel = (lb, optionItems) => {
         if(lb.parentNode.classList.contains('active')) {
+            lb.parentNode.classList.remove('active');
             optionItems.forEach((opt) => {
                 // remove를 못해주고 있음
-                const func = () => {handleSelect(lb, opt)}
+                const func = () => { handleSelect(lb, opt) }
                 opt.removeEventListener('click', func)
-                // console.log(lb.textContent)
             })
-            lb.parentNode.classList.remove('active');
         } else {
             lb.parentNode.classList.add('active');
             optionItems.forEach((opt) => {
-                const func = () => {handleSelect(lb, opt)}
+                const func = () => { handleSelect(lb, opt) }
                 opt.addEventListener('click', func)
-                // console.log(lb.textContent)
             })
         }
     };
@@ -112,6 +112,5 @@
     const handleSelect = (label, item) => {
         label.textContent = item.textContent;
         label.parentNode.classList.remove('active');
-        // console.log(label.textContent)
     };
 })()
