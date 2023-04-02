@@ -13,23 +13,14 @@
     const result = document.getElementById('result');
     const textarea = document.querySelector(".translateSelect__textarea__input");
 
-    let formTextarea = "light";
-    let formLeftLanguage = selectLeft.textContent;
-    let formRightLanguage = selectRight.textContent;
- 
-    // fetch시 에러 발생 (formData구조로 받게 되어있어서?)
-    const body = {
-        orig_lang: formLeftLanguage,
-        target_lang: formRightLanguage,
-        text: formTextarea,
-    }
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault()
-    })
 
     // this function is translate result
     const resultTranslate = () => {
+        const body = {
+            orig_lang: selectLeft.innerText,
+            target_lang: selectRight.innerText,
+            text: textarea.value,
+        }
         const resultText = document.getElementById('result')
         resultText.innerText = ''
 
@@ -77,10 +68,10 @@
     });
 
     translateBtn.addEventListener('click', event => {
+        event.preventDefault();
         resultTranslate()
     });
 
-    // CSS 문제로 다시 짤 것
 
     label.forEach((lb) => {
         lb.addEventListener('click', () => {
