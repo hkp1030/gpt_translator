@@ -13,22 +13,25 @@
     const result = document.getElementById('result');
     const textarea = document.querySelector(".translateSelect__textarea__input");
 
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+    })
 
     // this function is translate result
     const resultTranslate = () => {
+        const resultText = document.getElementById('result')
+        resultText.innerText = ''
+
         const body = {
             orig_lang: selectLeft.innerText,
             target_lang: selectRight.innerText,
             text: textarea.value,
+            csrfmiddlewaretoken: key[0].defaultValue
         }
-        const resultText = document.getElementById('result')
-        resultText.innerText = ''
 
         fetch('translate/', {
             method: 'POST',
-            body: JSON.stringify(body),
-            headers: {'X-CSRFToken': key[0].defaultValue},
-            mode: 'same-origin',
+            body: new URLSearchParams(body),
         })
             .then(response => {
                 if (!response.body) {
@@ -51,7 +54,7 @@
 
                 return readStream()
             })
-        .catch(error => console.error(error))
+            .catch(error => console.error(error))
     };
 
     // change select box
@@ -82,10 +85,12 @@
     });
 
     const clickLabel = (lb, optionItems) => {
-        if(lb.parentNode.classList.contains('active')) {
+        if (lb.parentNode.classList.contains('active')) {
             optionItems.forEach((opt) => {
                 // remove를 못해주고 있음
-                const func = () => {handleSelect(lb, opt)}
+                const func = () => {
+                    handleSelect(lb, opt)
+                }
                 opt.removeEventListener('click', func)
                 // console.log(lb.textContent)
             })
@@ -93,7 +98,9 @@
         } else {
             lb.parentNode.classList.add('active');
             optionItems.forEach((opt) => {
-                const func = () => {handleSelect(lb, opt)}
+                const func = () => {
+                    handleSelect(lb, opt)
+                }
                 opt.addEventListener('click', func)
                 // console.log(lb.textContent)
             })
