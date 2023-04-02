@@ -17,6 +17,20 @@
         event.preventDefault()
     })
 
+    window.addEventListener('popstate', (event) => {
+        if (event.state) {
+            selectLeft.textContent = event.state.orig_lang
+            selectRight.textContent = event.state.target_lang
+            textarea.value = event.state.text
+            result.innerText = event.state.result
+        } else {
+            selectLeft.textContent = 'English'
+            selectRight.textContent = 'Korean'
+            textarea.value = ''
+            result.innerText = ''
+        }
+    })
+
     // this function is translate result
     const resultTranslate = () => {
         const resultText = document.getElementById('result')
@@ -42,6 +56,12 @@
                 async function readStream() {
                     const {done, value} = await reader.read()
                     if (done) {
+                        const bodyWithResult = {...body, result: resultText.innerText}
+                        window.history.pushState(
+                            bodyWithResult,
+                            '',
+                            `?${new URLSearchParams(bodyWithResult).toString()}`
+                        )
                         console.log("Stream complete.")
                         return
                     }
