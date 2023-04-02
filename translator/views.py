@@ -9,7 +9,7 @@ from .forms import TranslatorForm
 def index(request):
     return render(request, 'translator/index.html')
 
-
+ 
 @require_POST
 def translate(request):
     form = TranslatorForm(request.POST)

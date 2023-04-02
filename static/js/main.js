@@ -2,9 +2,9 @@
     const title = baffle(document.querySelector('.gt_title'))
     title.set({
         characters: '▒▒░ <▒▒░▓ █▒▓░▓ ██▓ ░█░▒▒ █>▒▒ ░░▒ ▓▓█< ▒▒░▓',
-        speed: 50,
+        speed: 38,
     });
     title.start();
-    title.reveal(4000);
+    title.reveal(2000);
     title.stop()
 })()
