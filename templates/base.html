@@ -10,8 +10,15 @@
     <title>GPT Translator</title>
 </head>
 <body>
-<header class="gt_title">
-    <h1>GPT Translator</h1>
+<header>
+    <h1 class="gt_title">chatGPT&nbsp;Translator</h1>
+    <p class="gt_ex">
+        This translator was made with the API provided by chatGPT.
+        <span style="background-color: rgb(255, 251, 130);">
+            so it has the same performance as chatGPT.<br />
+        </span>
+        Translation accuracy may vary from language to language.
+    </p>
 </header>
 
 <main>
@@ -20,9 +27,13 @@
 </main>
 
 <footer>
-    <p>&copy; 2023 My Website. All rights reserved.</p>
+    <p style="margin-bottom: 40px; margin-top: 20px;">&copy; 2023 My Website. All rights reserved.</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baffle.js/0.3.6/baffle.min.js" 
+integrity="sha512-hu3ldLmTd/44nwMB6AzYMToQzA29HyteyZCzl40oZzTcVnEi9aaozi8kRgh4hZDNkA7Ko4RpeDmV7QDQ1u2EuA=="
+crossorigin="anonymous" referrerpolicy="no-referrer">
+</script>
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

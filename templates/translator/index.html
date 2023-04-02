@@ -8,19 +8,26 @@
         <div class="translateSelect">
             <div class="translateSelect__select">
                 <div class="translateSelect__select__container active">
-                    <button class="translateSelect__select__btn select__lt" name="orig_lang">English</button>
-                    <ul class="translateSelect__select__lang lang_lt">
-                        <li class="translateSelect__select__lang--option">Korean</li>
-                        <li class="translateSelect__select__lang--option">English</li>
-                        <li class="translateSelect__select__lang--option">Japanese</li>
-                        <li class="translateSelect__select__lang--option">Chinese</li>
-                        <li class="translateSelect__select__lang--option">French</li>
-                        <li class="translateSelect__select__lang--option">German</li>
-                        <li class="translateSelect__select__lang--option">Italian</li>
-                        <li class="translateSelect__select__lang--option">Portuguese</li>
-                        <li class="translateSelect__select__lang--option">Russian</li>
-                        <li class="translateSelect__select__lang--option">Polish</li>
-                    </ul>
+                    <button class="translateSelect__select__btn select__lt" name="orig_lang">
+                        <span>English</span>
+                        <i class="gg-chevron-down"></i>
+                    </button>
+                    <div class="translateSelect__select__lang lang_lt">
+                        <ul>
+                            <li class="translateSelect__select__lang--option">Korean</li>
+                            <li class="translateSelect__select__lang--option">English</li>
+                            <li class="translateSelect__select__lang--option">Japanese</li>
+                            <li class="translateSelect__select__lang--option">Chinese</li>
+                            <li class="translateSelect__select__lang--option">French</li>
+                        </ul>
+                        <ul>
+                            <li class="translateSelect__select__lang--option">German</li>
+                            <li class="translateSelect__select__lang--option">Italian</li>
+                            <li class="translateSelect__select__lang--option">Portuguese</li>
+                            <li class="translateSelect__select__lang--option">Russian</li>
+                            <li class="translateSelect__select__lang--option">Polish</li>
+                        </ul>
+                    </div>
                 </div>
                 <button id="langBtn" type="button">
                     <i class="gg-arrows-exchange"></i>
@@ -35,18 +42,33 @@
                 </div>
             </div>
         </div>
-        <!-- lang_rt" name="target_lang" -->
         <div class="translateSelect">
             <div class="translateSelect__select">
                 <div class="translateSelect__select__container">
-                    <button class="translateSelect__select__btn select__rt" name="target_lang">Korean</button>
-                    <ul class="translateSelect__select__lang lang_rt">
-                        <li class="translateSelect__select__lang--option">Korean</li>
-                        <li class="translateSelect__select__lang--option">English</li>
-                    </ul>
+                    <button class="translateSelect__select__btn select__rt" name="target_lang">
+                        <span>Korean</span>
+                        <i class="gg-chevron-down"></i>
+                    </button>
+                    <div class="translateSelect__select__lang lang_rt">
+                        <ul>
+                            <li class="translateSelect__select__lang--option">Korean</li>
+                            <li class="translateSelect__select__lang--option">English</li>
+                            <li class="translateSelect__select__lang--option">Japanese</li>
+                            <li class="translateSelect__select__lang--option">Chinese</li>
+                            <li class="translateSelect__select__lang--option">French</li>
+                        </ul>
+                        <ul>
+                            <li class="translateSelect__select__lang--option">German</li>
+                            <li class="translateSelect__select__lang--option">Italian</li>
+                            <li class="translateSelect__select__lang--option">Portuguese</li>
+                            <li class="translateSelect__select__lang--option">Russian</li>
+                            <li class="translateSelect__select__lang--option">Polish</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="translateSelect__area">
+                <div style="margin-top: 10px;"></div>
                 <p id="result"></p>
             </div>
             <div style="margin-bottom: 60px;">
@@ -58,8 +80,8 @@
         <!-- 광고 -->
     </aside>
 </section>
-<script src="{% static 'js/translate.js' %}"></script>
 <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrows-exchange.css' rel='stylesheet'>
+<script src="{% static 'js/translate.js' %}"></script>
 <script>
     const textareaResize = (event) => {
         event.style.height = 'auto';
