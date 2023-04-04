@@ -7,7 +7,7 @@
         {% csrf_token %}
         <div class="translateSelect">
             <div class="translateSelect__select">
-                <div class="translateSelect__select__container">
+                <div class="translateSelect__select__container container__lt">
                     <button class="translateSelect__select__btn select__lt" name="orig_lang">
                         <span>English</span>
                         <i class="gg-chevron-down"></i>
@@ -37,6 +37,9 @@
                 <textarea class="translateSelect__textarea__input" onkeyup="textareaResize(this)" 
                     placeholder="번역할 텍스트를 입력해주세요."
                     name="text" rows="9" maxlength="1000"></textarea>
+                    <p class="translateSelect__textarea__limit">
+                        <span class="translateSelect__textarea__limit--num">0</span><span>&nbsp;/ 1,000</span>
+                    </p>
                 <div class="translateSelect__button">
                     <button id="translateBtn" type="button">번역</button>
                 </div>
@@ -44,7 +47,7 @@
         </div>
         <div class="translateSelect">
             <div class="translateSelect__select">
-                <div class="translateSelect__select__container">
+                <div class="translateSelect__select__container container__rt">
                     <button class="translateSelect__select__btn select__rt" name="target_lang">
                         <span>Korean</span>
                         <i class="gg-chevron-down"></i>
@@ -69,7 +72,7 @@
             </div>
             <div class="translateSelect__area">
                 <div style="margin-top: 10px;"></div>
-                <p id="result"></p>
+                <pre id="result"></pre>
             </div>
             <div style="margin-bottom: 60px;">
 
@@ -83,6 +86,7 @@
 <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrows-exchange.css' rel='stylesheet'>
 <script src="{% static 'js/translate.js' %}"></script>
 <script>
+    // textarea js
     const textareaResize = (event) => {
         event.style.height = 'auto';
         event.style.height = (16 + event.scrollHeight) + 'px';
