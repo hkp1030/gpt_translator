@@ -133,4 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API Key
 
 openai.organization = 'org-fGvKVC9JUGRsO0PC4gGD2YdZ'
-openai.api_key = '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' 
+openai.api_key = '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'

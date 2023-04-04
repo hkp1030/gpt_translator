@@ -14,22 +14,39 @@
     const textareaLength = document.querySelector('.translateSelect__textarea__limit--num');
 
 
+    form.addEventListener('submit', (event) => {
+        event.preventDefault()
+    })
+
+    window.addEventListener('popstate', (event) => {
+        if (event.state) {
+            selectLeft.textContent = event.state.orig_lang
+            selectRight.textContent = event.state.target_lang
+            textarea.value = event.state.text
+            result.innerText = event.state.result
+        } else {
+            selectLeft.textContent = 'English'
+            selectRight.textContent = 'Korean'
+            textarea.value = ''
+            result.innerText = ''
+        }
+    })
 
     // this function is translate result
     const resultTranslate = () => {
+        const resultText = document.getElementById('result')
+        resultText.innerText = ''
+
         const body = {
             orig_lang: selectLeft.innerText,
             target_lang: selectRight.innerText,
             text: textarea.value,
+            csrfmiddlewaretoken: key[0].defaultValue
         }
-        const resultText = document.getElementById('result')
-        resultText.innerText = ''
 
         fetch('translate/', {
             method: 'POST',
-            body: JSON.stringify(body),
-            headers: {'X-CSRFToken': key[0].defaultValue},
-            mode: 'same-origin',
+            body: new URLSearchParams(body),
         })
             .then(response => {
                 if (!response.body) {
@@ -40,6 +57,12 @@
                 async function readStream() {
                     const {done, value} = await reader.read()
                     if (done) {
+                        const bodyWithResult = {...body, result: resultText.innerText}
+                        window.history.pushState(
+                            bodyWithResult,
+                            '',
+                            `?${new URLSearchParams(bodyWithResult).toString()}`
+                        )
                         console.log("Stream complete.")
                         return
                     }
@@ -52,7 +75,7 @@
 
                 return readStream()
             })
-        .catch(error => console.error(error))
+            .catch(error => console.error(error))
     };
 
     // change select box
@@ -96,7 +119,6 @@
         })
     });
 
-
     const clickLabel = (label, options) => {
         if (label.parentNode.classList.contains('active')) {
             options.forEach((opt) => {
@@ -108,7 +130,6 @@
             })
             label.parentNode.classList.remove('active');
         } else {
-
             label.parentNode.classList.add('active');
             options.forEach((opt) => {
                 const func = () => {
