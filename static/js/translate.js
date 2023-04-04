@@ -96,13 +96,7 @@
         })
     });
 
-<<<<<<< Updated upstream
-    const clickLabel = (lb, optionItems) => {
-        if(lb.parentNode.classList.contains('active')) {
-            optionItems.forEach((opt) => {
-                // remove를 못해주고 있음
-                const func = () => {handleSelect(lb, opt)}
-=======
+
     const clickLabel = (label, options) => {
         if (label.parentNode.classList.contains('active')) {
             options.forEach((opt) => {
@@ -110,22 +104,16 @@
                     handleSelect(label, opt)
                 }
                 // remove를 못해주고 있음
->>>>>>> Stashed changes
                 opt.removeEventListener('click', func)
             })
             label.parentNode.classList.remove('active');
         } else {
-<<<<<<< Updated upstream
-            lb.parentNode.classList.add('active');
-            optionItems.forEach((opt) => {
-                const func = () => {handleSelect(lb, opt)}
-=======
+
             label.parentNode.classList.add('active');
             options.forEach((opt) => {
                 const func = () => {
                     handleSelect(label, opt)
                 }
->>>>>>> Stashed changes
                 opt.addEventListener('click', func)
                 // console.log(label.innerText)
             })
