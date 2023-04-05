@@ -79,7 +79,9 @@
     };
 
     // change select box
+    let clickable = true;
     langBtn.addEventListener("click", () => {
+
         let tmpSelect = selectLeft.textContent
         selectLeft.textContent = selectRight.textContent
         selectRight.textContent = tmpSelect
@@ -88,7 +90,17 @@
         let tmpTextarea = result.textContent
         result.textContent = textarea.value
         textarea.value = tmpTextarea
-        if (textarea.value !== '') resultTranslate()
+
+        if (textarea.value !== '' && clickable === true) {
+            resultTranslate()
+            clickable = false
+            setTimeout(() => {
+                clickable = true
+            }, 1000)
+        } 
+
+        textareaLength.textContent = textarea.value.length
+        
     });
 
     translateBtn.addEventListener('click', event => {
@@ -143,22 +155,34 @@
 
     const handleSelect = (label, item) => {
         let tmp = label.innerText
+        let newIcon = document.createElement('i');
+
         label.innerText = item.innerText;
+
+        newIcon.setAttribute('class', 'gg-chevron-down');
+        label.appendChild(newIcon);
         label.parentNode.classList.remove('active');
+  
+
         if (selectLeft.innerText === selectRight.innerText) {
             if (label.classList.contains('select__lt')) {
-                selectRight.innerText = tmp
+                selectRight.innerHTML = tmp + `<i class="gg-chevron-down"></i>`
             } else {
-                selectLeft.innerText = tmp
+                selectLeft.innerHTML = tmp + `<i class="gg-chevron-down"></i>`
             }
+            console.log(label)
             let tmpTextarea = result.textContent
             result.textContent = textarea.value
             textarea.value = tmpTextarea
             tmpTextarea = ''
+
+            textareaLength.textContent = textarea.value.length
+            
+            // 양쪽 같은 언어 선택시 반대쪽 언어 변경되는 요소를 너무 빠르게 누르면 번역이 꼬임
+            // resultTranslate()
         }
+
         tmp = ''
-        // 중복 처리 해결 안돼서 번역 다중에러남
-        // resultTranslate()
     };
 
 
@@ -169,4 +193,19 @@
         }
         textareaLength.textContent = event.target.value.length
     })
+
+    // 한글은 2byte?
+    // const getByteLength = (str) => {
+    //     let byte = 0;
+    //     const code = str.charCodeAt(0);
+
+    //     if (code > 127) {
+    //         byte += 2;
+    //     } else if (code > 64 && code < 91) {
+    //         byte += 2;
+    //     } else {
+    //         byte += 1;
+    //         return byte
+    //     }
+    // }
 })()
