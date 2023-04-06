@@ -79,21 +79,43 @@
     };
 
     // change select box
+    let clickable = true;
     langBtn.addEventListener("click", () => {
-        let tmpSelect = selectLeft.textContent
-        selectLeft.textContent = selectRight.textContent
-        selectRight.textContent = tmpSelect
+        if (clickable === true && result.textContent !== '') {
+            clickable = false
+            let tmpSelect = selectLeft.textContent
+            selectLeft.textContent = selectRight.textContent
+            selectRight.textContent = tmpSelect
+            
+            // Text가 설명식으로 나와서 변경할 때 이상한 번역이 너무 많이 나온다. 의논해볼것
+            // textarea <-> result change
+            // let tmpTextarea = result.textContent
+            // result.textContent = textarea.value
+            // textarea.value = tmpTextarea
+            
+            resultTranslate()
+            setTimeout(() => {
+                clickable = true
+            }, 300)
+        }
 
-        // textarea <-> result change
-        let tmpTextarea = result.textContent
-        result.textContent = textarea.value
-        textarea.value = tmpTextarea
-        if (textarea.value !== '') resultTranslate()
+        textareaLength.textContent = textarea.value.length
     });
 
+    let translateClickable = true;
     translateBtn.addEventListener('click', event => {
         event.preventDefault();
-        resultTranslate()
+        if (textarea.value === '') return
+        
+        if (translateClickable === true) {
+            translateClickable = false
+            resultTranslate()
+            
+            // 연속 클릭 방지
+            setTimeout(() => {
+                translateClickable = true
+            }, 500)
+        }
     });
 
 
@@ -141,24 +163,35 @@
         }
     };
 
-    const handleSelect = (label, item) => {
+    const handleSelect = (label, opt) => {
         let tmp = label.innerText
-        label.innerText = item.innerText;
+        let newIcon = document.createElement('i');
+
+        label.innerText = opt.innerText;
+
+        newIcon.setAttribute('class', 'gg-chevron-down');
+        label.appendChild(newIcon);
         label.parentNode.classList.remove('active');
+  
+
         if (selectLeft.innerText === selectRight.innerText) {
             if (label.classList.contains('select__lt')) {
-                selectRight.innerText = tmp
+                selectRight.innerHTML = tmp + `<i class="gg-chevron-down"></i>`
             } else {
-                selectLeft.innerText = tmp
+                selectLeft.innerHTML = tmp + `<i class="gg-chevron-down"></i>`
             }
             let tmpTextarea = result.textContent
             result.textContent = textarea.value
             textarea.value = tmpTextarea
             tmpTextarea = ''
+
+            textareaLength.textContent = textarea.value.length
+            
+            // 양쪽 같은 언어 선택시 반대쪽 언어 변경되는 요소를 너무 빠르게 누르면 번역이 꼬임
+            // resultTranslate()
         }
+
         tmp = ''
-        // 중복 처리 해결 안돼서 번역 다중에러남
-        // resultTranslate()
     };
 
 
@@ -169,4 +202,19 @@
         }
         textareaLength.textContent = event.target.value.length
     })
+
+    // 한글은 2byte?
+    // const getByteLength = (str) => {
+    //     let byte = 0;
+    //     const code = str.charCodeAt(0);
+
+    //     if (code > 127) {
+    //         byte += 2;
+    //     } else if (code > 64 && code < 91) {
+    //         byte += 2;
+    //     } else {
+    //         byte += 1;
+    //         return byte
+    //     }
+    // }
 })()
