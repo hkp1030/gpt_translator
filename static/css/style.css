@@ -14,6 +14,7 @@
   /* Yellow */
   --yellow-color: rgb(255, 251, 130);
   --sky-color: rgb(226, 241, 255);
+  --grey-color: rgb(220, 220, 220);
 }
 
 
@@ -174,7 +175,7 @@ header {
 
 /* Translate Section */
 .translateSection {
-  border: 1px solid rgb(220, 220, 220);
+  border: 1px solid var(--grey-color);
   border-radius: 5px;
   margin-bottom: 40px;
 }
@@ -365,7 +366,7 @@ header {
   justify-content: flex-end;
 }
 
-
+/* icon */
 .gg-arrows-exchange {
   color: rgb(72, 72, 72);
 }
@@ -455,6 +456,10 @@ header {
 }
 
 
+.sectionBottom {
+  margin-bottom: 60px;
+}
+
 
 /* footer */
 footer {
@@ -485,12 +490,6 @@ footer {
 
 
 /* Mobile */
-@media (max-height: 700px) {
-  body {
-    height: 100%;
-  }
-}
-
 @media (max-width: 870px) {
   .gt_ex {
     display: flex;
@@ -525,6 +524,10 @@ footer {
 }
 
 @media (max-width: 767px) {
+  body {
+    height: 100%;
+  }
+  
   header,
   main,
   footer {
@@ -552,10 +555,97 @@ footer {
 }
 
 @media (max-width: 481px) {
+  header {
+    padding-top: 40px;
+  }
+  
   header,
   main,
   footer {
     width: 100%;
+  }
+
+  .gt_title {
+    display: flex;
+    justify-content: center;
+    padding: 0 0 20px 0;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .gt_ex {
+    text-align: center;
+    padding-bottom: 40px;
+    line-height: 1.8;
+    font-size: 14px;
+  }
+  
+  .translateSection {
+    border: none;
+    border-top: 1px solid var(--grey-color);
+    border-bottom: 1px solid var(--grey-color);
+    border-radius: 0;
+  }
+
+  #langBtn {
+    padding: 0 0 0 15px;
+  }
+  
+  .translateSelect__textarea {
+    padding: 0;
+  }
+
+  .translateSelect__textarea__input {
+    width: 95%;
+    border: 1px solid var(--grey-color);
+    border-radius: 10px;
+    padding: 10px 10px;
+  }
+
+  .translateSelect__button,
+  .translateSelect__textarea__limit {
+    width: 100%;
+  }
+
+
+  .translateSelect__area {
+    min-height: 189px;
+  }
+
+  .sectionBottom {
+    margin-bottom: 0px;
+  }
+
+  footer {
+    font-size: 10px;
+  }
+
+  .footer__container {
+    max-width: 376px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #darkMode {
+    font-size: 12px;
+  }
+
+  .gg-dark-mode {
+    width: 16px;
+    height: 16px;
+  }
+  .gg-dark-mode::after {
+    width: 3px;
+    height: 6px;
+    right: 2px;
+    top: 2px;
+  }
+  .gg-dark-mode::before {
+    width: 7px;
+    height: 15px;
+    top: -1px;
+    left: -1px;
   }
 }
 

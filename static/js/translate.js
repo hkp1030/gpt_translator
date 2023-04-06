@@ -81,31 +81,41 @@
     // change select box
     let clickable = true;
     langBtn.addEventListener("click", () => {
-
-        let tmpSelect = selectLeft.textContent
-        selectLeft.textContent = selectRight.textContent
-        selectRight.textContent = tmpSelect
-
-        // textarea <-> result change
-        let tmpTextarea = result.textContent
-        result.textContent = textarea.value
-        textarea.value = tmpTextarea
-
-        if (textarea.value !== '' && clickable === true) {
-            resultTranslate()
+        if (clickable === true && result.textContent !== '') {
             clickable = false
+            let tmpSelect = selectLeft.textContent
+            selectLeft.textContent = selectRight.textContent
+            selectRight.textContent = tmpSelect
+            
+            // Text가 설명식으로 나와서 변경할 때 이상한 번역이 너무 많이 나온다. 의논해볼것
+            // textarea <-> result change
+            // let tmpTextarea = result.textContent
+            // result.textContent = textarea.value
+            // textarea.value = tmpTextarea
+            
+            resultTranslate()
             setTimeout(() => {
                 clickable = true
-            }, 1000)
-        } 
+            }, 300)
+        }
 
         textareaLength.textContent = textarea.value.length
-        
     });
 
+    let translateClickable = true;
     translateBtn.addEventListener('click', event => {
         event.preventDefault();
-        resultTranslate()
+        if (textarea.value === '') return
+        
+        if (translateClickable === true) {
+            translateClickable = false
+            resultTranslate()
+            
+            // 연속 클릭 방지
+            setTimeout(() => {
+                translateClickable = true
+            }, 500)
+        }
     });
 
 
@@ -153,11 +163,11 @@
         }
     };
 
-    const handleSelect = (label, item) => {
+    const handleSelect = (label, opt) => {
         let tmp = label.innerText
         let newIcon = document.createElement('i');
 
-        label.innerText = item.innerText;
+        label.innerText = opt.innerText;
 
         newIcon.setAttribute('class', 'gg-chevron-down');
         label.appendChild(newIcon);
@@ -170,7 +180,6 @@
             } else {
                 selectLeft.innerHTML = tmp + `<i class="gg-chevron-down"></i>`
             }
-            console.log(label)
             let tmpTextarea = result.textContent
             result.textContent = textarea.value
             textarea.value = tmpTextarea
