@@ -87,19 +87,19 @@
             selectLeft.textContent = selectRight.textContent
             selectRight.textContent = tmpSelect
             
-            // Text가 설명식으로 나와서 변경할 때 이상한 번역이 너무 많이 나온다. 의논해볼것
             // textarea <-> result change
-            // let tmpTextarea = result.textContent
-            // result.textContent = textarea.value
-            // textarea.value = tmpTextarea
+            let tmpTextarea = result.textContent
+            result.textContent = textarea.value
+            textarea.value = tmpTextarea
             
-            resultTranslate()
+            // Text가 설명식으로 나와서 변경할 때 이상한 번역이 너무 많이 나온다. 의논해볼것
+            // resultTranslate()
             setTimeout(() => {
                 clickable = true
             }, 300)
         }
 
-        textareaLength.textContent = textarea.value.length
+        textareaLength.textContent = getTextareaLength(textarea.value)
     });
 
     let translateClickable = true;
@@ -147,7 +147,6 @@
                 const func = () => {
                     handleSelect(label, opt)
                 }
-                // remove를 못해주고 있음
                 opt.removeEventListener('click', func)
             })
             label.parentNode.classList.remove('active');
@@ -158,7 +157,6 @@
                     handleSelect(label, opt)
                 }
                 opt.addEventListener('click', func)
-                // console.log(label.innerText)
             })
         }
     };
@@ -185,7 +183,7 @@
             textarea.value = tmpTextarea
             tmpTextarea = ''
 
-            textareaLength.textContent = textarea.value.length
+            textareaLength.textContent = getTextareaLength(textarea.value)
             
             // 양쪽 같은 언어 선택시 반대쪽 언어 변경되는 요소를 너무 빠르게 누르면 번역이 꼬임
             // resultTranslate()
@@ -200,21 +198,25 @@
         if (event.target.value.length > 1000) {
             return
         }
-        textareaLength.textContent = event.target.value.length
+        
+        textareaLength.textContent = getTextareaLength(event.target.value)
     })
+    
+    // Calculate textarea bytes
+    const getTextareaLength = (str) => {
+        let strLength = 0;
+        
+        for (i = 0; i < str.length; i++) {
+            const code = str.charCodeAt(i)
+            const ch = str.substr(i,1).toUpperCase()
+            
+            if ((ch < "0" || ch > "9") && (ch < "A" || ch > "Z") && ((code > 255) || (code < 0))) {
+                strLength = strLength + 2;
+            } else {
+                strLength = strLength + 1;
+            }
+        }
 
-    // 한글은 2byte?
-    // const getByteLength = (str) => {
-    //     let byte = 0;
-    //     const code = str.charCodeAt(0);
-
-    //     if (code > 127) {
-    //         byte += 2;
-    //     } else if (code > 64 && code < 91) {
-    //         byte += 2;
-    //     } else {
-    //         byte += 1;
-    //         return byte
-    //     }
-    // }
+        return strLength;
+    }
 })()

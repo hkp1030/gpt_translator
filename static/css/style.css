@@ -313,10 +313,12 @@ header {
   overflow: hidden;
   position: relative;
   width: 88%;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: var(--font-regular);
+  font-weight: 300;
   border: none;
   resize: none;
-  padding: 0 10px;
+  padding: 10px;
 }
 
 .translateSelect__textarea__input:focus {
@@ -349,6 +351,9 @@ header {
   padding: auto;
   word-wrap: break-word;
   white-space: pre-wrap;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 300;
+  font-size: var(--font-regular);
 }
 
 /* button */
@@ -490,6 +495,12 @@ footer {
 
 
 /* Mobile */
+@media (max-height: 700px) {
+  body {
+    height: 100%;
+  }
+}
+
 @media (max-width: 870px) {
   .gt_ex {
     display: flex;
@@ -691,7 +702,7 @@ body[data-theme='dark'] .translateSelect__area {
 }
 
 body[data-theme='dark'] #result {
-  color: #000;
+  color: #fff;
 }
 
 body[data-theme='dark'] #darkMode {
