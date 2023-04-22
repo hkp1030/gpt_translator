@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- pybo CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <title>GPT Translator</title>
+    <title>chatGPT Translator</title>
 </head>
 <body>
 <header>
@@ -15,7 +15,7 @@
     <p class="gt_ex">
         This translator was made with the API provided by chatGPT.
         <span>
-            so it has the same performance as chatGPT.<br />
+            so it has the same performance as chatGPT.<br/>
         </span>
         Translation accuracy may vary from language to language.
     </p>
@@ -28,7 +28,7 @@
 
 <footer>
     <div class="footer__container">
-        <p>&copy; 2023 My Website. All rights reserved.</p>
+        <p>&copy; 2023 chatGPT Translator. All rights reserved.</p>
         <button id="darkMode">
             <i class="gg-dark-mode"></i>
             Dark Mode
@@ -36,10 +36,7 @@
     </div>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/baffle.js/0.3.6/baffle.min.js" 
-integrity="sha512-hu3ldLmTd/44nwMB6AzYMToQzA29HyteyZCzl40oZzTcVnEi9aaozi8kRgh4hZDNkA7Ko4RpeDmV7QDQ1u2EuA=="
-crossorigin="anonymous" referrerpolicy="no-referrer">
-</script>
+<script src="{% static 'vendor/baffle.js-0.3.6/baffle.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

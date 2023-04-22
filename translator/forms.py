@@ -3,11 +3,19 @@ from django import forms
 LANGUAGE_CHOICES = [
     ('Korean', 'Korean'),
     ('English', 'English'),
+    ('Japanese', 'Japanese'),
+    ('Chinese', 'Chinese'),
+    ('Spanish', 'Spanish'),
+    ('French', 'French'),
+    ('German', 'German'),
+    ('Italian', 'Italian'),
+    ('Portuguese', 'Portuguese'),
+    ('Russian', 'Russian'),
 ]
 
 
 class TranslatorForm(forms.Form):
-    text = forms.CharField(max_length=1000)
+    text = forms.CharField(max_length=2000)
     orig_lang = forms.ChoiceField(choices=LANGUAGE_CHOICES)
     target_lang = forms.ChoiceField(choices=LANGUAGE_CHOICES)
 

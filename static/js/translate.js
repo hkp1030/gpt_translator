@@ -49,6 +49,9 @@
             body: new URLSearchParams(body),
         })
             .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 if (!response.body) {
                     throw new Error("No ReadableStream found.")
                 }
@@ -86,12 +89,12 @@
             let tmpSelect = selectLeft.textContent
             selectLeft.textContent = selectRight.textContent
             selectRight.textContent = tmpSelect
-            
+
             // textarea <-> result change
             let tmpTextarea = result.textContent
             result.textContent = textarea.value
             textarea.value = tmpTextarea
-            
+
             // Text가 설명식으로 나와서 변경할 때 이상한 번역이 너무 많이 나온다. 의논해볼것
             // resultTranslate()
             setTimeout(() => {
@@ -106,11 +109,11 @@
     translateBtn.addEventListener('click', event => {
         event.preventDefault();
         if (textarea.value === '') return
-        
+
         if (translateClickable === true) {
             translateClickable = false
             resultTranslate()
-            
+
             // 연속 클릭 방지
             setTimeout(() => {
                 translateClickable = true
@@ -126,7 +129,7 @@
         if (event.target !== item && event.target !== selectLeft) {
             selectLt.remove('active');
         }
-        
+
         if (event.target !== item && event.target !== selectRight) {
             selectRt.remove('active');
         }
@@ -170,7 +173,7 @@
         newIcon.setAttribute('class', 'gg-chevron-down');
         label.appendChild(newIcon);
         label.parentNode.classList.remove('active');
-  
+
 
         if (selectLeft.innerText === selectRight.innerText) {
             if (label.classList.contains('select__lt')) {
@@ -184,7 +187,7 @@
             tmpTextarea = ''
 
             textareaLength.textContent = getTextareaLength(textarea.value)
-            
+
             // 양쪽 같은 언어 선택시 반대쪽 언어 변경되는 요소를 너무 빠르게 누르면 번역이 꼬임
             // resultTranslate()
         }
@@ -195,21 +198,21 @@
 
     // Textarea Textlength
     textarea.addEventListener('input', (event) => {
-        if (event.target.value.length > 1000) {
+        if (event.target.value.length > 2000) {
             return
         }
-        
+
         textareaLength.textContent = getTextareaLength(event.target.value)
     })
-    
+
     // Calculate textarea bytes
     const getTextareaLength = (str) => {
         let strLength = 0;
-        
+
         for (i = 0; i < str.length; i++) {
             const code = str.charCodeAt(i)
-            const ch = str.substr(i,1).toUpperCase()
-            
+            const ch = str.substr(i, 1).toUpperCase()
+
             if ((ch < "0" || ch > "9") && (ch < "A" || ch > "Z") && ((code > 255) || (code < 0))) {
                 strLength = strLength + 2;
             } else {
