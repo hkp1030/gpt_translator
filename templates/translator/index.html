@@ -34,7 +34,7 @@
                 </button>
             </div>
             <div class="translateSelect__textarea">
-                <textarea class="translateSelect__textarea__input" onkeyup="textareaResize(this)" 
+                <textarea class="translateSelect__textarea__input" onkeydown="textareaResize(this)" 
                     placeholder="번역할 텍스트를 입력해주세요."
                     name="text" rows="9" maxlength="2000"></textarea>
                     <p class="translateSelect__textarea__limit">
@@ -84,9 +84,12 @@
 <script src="{% static 'js/translate.js' %}"></script>
 <script>
     // textarea js
+    
     const textareaResize = (event) => {
+        let scrollTop = event.scrollTop
         event.style.height = 'auto';
-        event.style.height = (16 + event.scrollHeight) + 'px';
+        event.style.height = (event.scrollHeight) + 'px';
+        event.scrollTop = scrollTop
     }
 </script>
 {% endblock %}
