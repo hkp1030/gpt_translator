@@ -86,10 +86,8 @@
     // textarea js
     
     const textareaResize = (event) => {
-        let scrollTop = event.scrollTop
         event.style.height = 'auto';
         event.style.height = (event.scrollHeight) + 'px';
-        event.scrollTop = scrollTop
     }
 </script>
 {% endblock %}
