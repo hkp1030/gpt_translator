@@ -84,11 +84,11 @@
     // change select box
     let clickable = true;
     langBtn.addEventListener("click", () => {
-        if (clickable === true && result.textContent !== '') {
+        if (clickable === true) {
             clickable = false
             let tmpSelect = selectLeft.textContent
-            selectLeft.textContent = selectRight.textContent
-            selectRight.textContent = tmpSelect
+            selectLeft.innerHTML = selectRight.textContent + `<i class="gg-chevron-down"></i>`
+            selectRight.innerHTML = tmpSelect + `<i class="gg-chevron-down"></i>`
 
             // textarea <-> result change
             let tmpTextarea = result.textContent
